@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -36,5 +37,5 @@ public class Application {
     private LocalDate dateApplied;
 
     @Column(name = "LastUpdated")
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
 }

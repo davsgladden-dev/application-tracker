@@ -14,5 +14,5 @@ public class ApplicationDto {
     private ApplicationStatus applicationStatus;
     private String note;
     private LocalDate dateApplied;
-    private LocalDate lastUpdated;
+    private LocalDateTime lastUpdated;
 }
