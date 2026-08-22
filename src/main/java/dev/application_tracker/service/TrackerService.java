@@ -1,12 +1,11 @@
 package dev.application_tracker.service;
 
-import dev.application_tracker.Converter.ApplicationConverter;
+import dev.application_tracker.converter.ApplicationConverter;
 import dev.application_tracker.dto.ApplicationDto;
 import dev.application_tracker.entity.Application;
 import dev.application_tracker.respository.ApplicationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.List;

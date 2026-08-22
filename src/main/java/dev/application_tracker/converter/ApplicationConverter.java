@@ -1,4 +1,4 @@
-package dev.application_tracker.Converter;
+package dev.application_tracker.converter;
 
 import dev.application_tracker.dto.ApplicationDto;
 import dev.application_tracker.entity.Application;
