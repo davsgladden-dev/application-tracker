@@ -6,6 +6,7 @@ import dev.application_tracker.service.TrackerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +32,8 @@ public class Controller {
         return trackerService.getApplications();
     }
 
-    @GetMapping("/application/{id}")
-    public ApplicationDto getApplication(@RequestParam int applicationId) {
+    @GetMapping("/application/{applicationId}")
+    public ApplicationDto getApplication(@PathVariable int applicationId) {
         return trackerService.getApplication(applicationId);
     }
 
