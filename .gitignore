@@ -35,4 +35,3 @@ build/
 target/
 backup/
 .idea/
-src/main/resources/application.yml
