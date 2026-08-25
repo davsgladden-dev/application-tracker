@@ -10,9 +10,11 @@ export type ApplicationStatus =
 export interface Application {
   applicationId: number;
   businessName: string;
-  url: string | null;
+  url: string;
   applicationStatus: ApplicationStatus;
-  note: string | null;
-  dateApplied: string | null;
-  lastUpdated: string | null;
+  note: string;
+  dateApplied: string;
+  lastUpdated: string;
 }
+
+export type NewApplication = Omit<Application, "applicationId" | "lastUpdated">;
