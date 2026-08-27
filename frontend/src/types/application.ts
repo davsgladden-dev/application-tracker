@@ -1,12 +1,21 @@
+export type ApplicationStatus =
+  | "Applied"
+  | "Rejected"
+  | "InterviewScheduled"
+  | "RejectedPostInterview"
+  | "OfferReceived"
+  | "OfferRejected"
+  | "OfferAccepted"
+  | "PositionClosed";
 
-export type ApplicationStatus = 'Applied' | 'Rejected' | 'InterviewScheduled' | 'RejectedPostInterview' | 'OfferReceived' | 'OfferRejected' | 'OfferAccepted';
-
-export interface ApplicationDto {
-    applicationId: number;
-    businessName: string;
-    url: string;
-    applicationStatus: ApplicationStatus;
-    note: string;
-    dateApplied: string | null;
-    lastUpdated: string | null;
+export interface Application {
+  applicationId: number;
+  businessName: string;
+  url: string;
+  applicationStatus: ApplicationStatus;
+  note: string;
+  dateApplied: string;
+  lastUpdated: string;
 }
+
+export type NewApplication = Omit<Application, "applicationId" | "lastUpdated">;
