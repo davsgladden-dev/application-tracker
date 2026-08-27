@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { NewApplication, ApplicationStatus } from "../types/application";
 import { saveApplication } from "../api/applications";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function AddApplicationPage() {
   const [form, setForm] = useState<NewApplication>({
@@ -10,20 +11,16 @@ function AddApplicationPage() {
     note: "",
     dateApplied: "",
   });
-  const [saving, setSaving] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<boolean>(false);
 
-  async function handleSubmit() {
-    setError(null);
-    setSuccess(false);
-    if (form.businessName === "") {
-      setError("Business name is required");
-      return;
-    }
-    setSaving(true);
-    try {
-      await saveApplication(form);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
+
+  const queryClient = useQueryClient();
+
+  const saveMutation = useMutation({
+    mutationFn: saveApplication,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
       setForm({
         businessName: "",
         url: "",
@@ -32,11 +29,17 @@ function AddApplicationPage() {
         dateApplied: "",
       });
       setSuccess(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Error saving application");
-    } finally {
-      setSaving(false);
+    },
+  });
+
+  function handleSubmit() {
+    setSuccess(false);
+    setValidationError(null);
+    if (form.businessName === "") {
+      setValidationError("Business name is required");
+      return;
     }
+    saveMutation.mutate(form);
   }
 
   return (
@@ -72,6 +75,7 @@ function AddApplicationPage() {
         <option value="OfferReceived">Offer Received</option>
         <option value="OfferRejected">Offer Rejected</option>
         <option value="OfferAccepted">Offer Accepted</option>
+        <option value="PositionClosed">Position Closed</option>
       </select>
       <br />
       <label>Note: </label>
@@ -88,10 +92,11 @@ function AddApplicationPage() {
       />
       <br />
       <br />
-      <button onClick={handleSubmit} disabled={saving}>
+      <button onClick={handleSubmit} disabled={saveMutation.isPending}>
         Submit
       </button>
-      {error && <p>{error}</p>}
+      {validationError && <p>{validationError}</p>}
+      {saveMutation.error && <p>{saveMutation.error.message}</p>}
       {success && <p>Application saved</p>}
     </>
   );

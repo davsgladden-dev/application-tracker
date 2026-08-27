@@ -5,7 +5,8 @@ export type ApplicationStatus =
   | "RejectedPostInterview"
   | "OfferReceived"
   | "OfferRejected"
-  | "OfferAccepted";
+  | "OfferAccepted"
+  | "PositionClosed";
 
 export interface Application {
   applicationId: number;
