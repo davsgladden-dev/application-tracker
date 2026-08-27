@@ -2,6 +2,8 @@ package dev.application_tracker.service;
 
 import dev.application_tracker.converter.ApplicationConverter;
 import dev.application_tracker.dto.ApplicationDto;
+import dev.application_tracker.dto.NoteDto;
+import dev.application_tracker.dto.StatusDto;
 import dev.application_tracker.entity.Application;
 import dev.application_tracker.entity.ApplicationStatus;
 import dev.application_tracker.respository.ApplicationRepository;
@@ -35,32 +37,31 @@ public class TrackerService {
     }
 
     @Transactional
-    public void saveApplication(ApplicationDto applicationDto) {
+    public ApplicationDto saveApplication(ApplicationDto applicationDto) {
         Application app = applicationConverter.convertToEntity(applicationDto);
         if (app.getDateApplied() == null) {
             app.setDateApplied(LocalDate.now());
         }
-        applicationRepository.save(app);
+        app.setLastUpdated(LocalDateTime.now());
+        return applicationConverter.convertToDto((applicationRepository.save(app)));
     }
 
     @Transactional
-    public void updateApplicationStatus(int applicationID, ApplicationStatus status) {
-        if (status == null) {return;}
-            Application app = applicationRepository.findById(applicationID).orElseThrow();
+    public ApplicationDto updateApplicationStatus(StatusDto statusDto) {
+        Application app = applicationRepository.findById(statusDto.getApplicationId()).orElseThrow();
 
-            app.setApplicationStatus(status);
-            app.setLastUpdated(LocalDateTime.now());
-            applicationRepository.save(app);
+        app.setApplicationStatus(statusDto.getStatus());
+        app.setLastUpdated(LocalDateTime.now());
+        return applicationConverter.convertToDto(applicationRepository.save(app));
     }
 
     @Transactional
-    public void updateApplicationNote(int applicationID, String note) {
-        if (note == null) {return;}
-            Application app = applicationRepository.findById(applicationID).orElseThrow();
+    public ApplicationDto updateApplicationNote(NoteDto noteDto) {
+        Application app = applicationRepository.findById(noteDto.getApplicationId()).orElseThrow();
 
-            app.setNote(note);
-            app.setLastUpdated(LocalDateTime.now());
-            applicationRepository.save(app);
+        app.setNote(noteDto.getNote());
+        app.setLastUpdated(LocalDateTime.now());
+        return applicationConverter.convertToDto(applicationRepository.save(app));
     }
 
 }

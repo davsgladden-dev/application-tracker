@@ -1,11 +1,15 @@
 package dev.application_tracker.contoller;
 
 import dev.application_tracker.dto.ApplicationDto;
+import dev.application_tracker.dto.NoteDto;
+import dev.application_tracker.dto.StatusDto;
+import dev.application_tracker.entity.Application;
 import dev.application_tracker.entity.ApplicationStatus;
 import dev.application_tracker.service.TrackerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,21 +42,18 @@ public class Controller {
     }
 
     @PostMapping("/saveApplication")
-    public ResponseEntity<String> saveApplication(@RequestBody ApplicationDto applicationDto) {
-        trackerService.saveApplication(applicationDto);
-        return ResponseEntity.ok("success");
+    public ResponseEntity<ApplicationDto> saveApplication(@RequestBody ApplicationDto applicationDto) {
+        return ResponseEntity.ok().body(trackerService.saveApplication(applicationDto));
     }
 
-    @PostMapping("/updateStatus")
-    public ResponseEntity<String> updateApplicationStatus(@RequestParam int applicationId, @RequestParam ApplicationStatus status) {
-        trackerService.updateApplicationStatus(applicationId, status);
-        return ResponseEntity.ok("success");
+    @PatchMapping("/updateStatus")
+    public ResponseEntity<ApplicationDto> updateApplicationStatus(@RequestBody StatusDto statusDto) {
+         return ResponseEntity.ok().body(trackerService.updateApplicationStatus(statusDto));
     }
 
-    @PostMapping("/updateNote")
-    public ResponseEntity<String> updateApplicationNote(@RequestParam int applicationId, @RequestParam String note) {
-        trackerService.updateApplicationNote(applicationId, note);
-        return ResponseEntity.ok("success");
+    @PatchMapping("/updateNote")
+    public ResponseEntity<ApplicationDto> updateApplicationNote(@RequestBody NoteDto noteDto) {
+        return ResponseEntity.ok().body(trackerService.updateApplicationNote(noteDto));
     }
 
 }

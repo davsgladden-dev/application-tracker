@@ -8,7 +8,8 @@ public enum ApplicationStatus {
     RejectedPostInterview(4),
     OfferReceived(5),
     OfferRejected(6),
-    OfferAccepted(7);
+    OfferAccepted(7),
+    PositionClosed(8);
 
     ApplicationStatus(int status) {this.status = status;}
 
