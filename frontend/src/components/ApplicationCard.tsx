@@ -16,8 +16,8 @@ export default function ApplicationCard({
   const [draft, setDraft] = useState(application.note);
 
   return (
-    <div className="border p-4 space-y-4">
-      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
+    <div className="border p-4 space-y-4 border-gray-200 rounded-lg bg-white shadow-sm w-full">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
         <dt className="text-gray-600">Business Name:</dt>
         <dd>{application.businessName}</dd>
         {application.url && (
@@ -28,6 +28,7 @@ export default function ApplicationCard({
         )}
         <dt className="text-gray-600">Application Status:</dt>
         <select
+          className="border rounded px-2 py-1 justify-self-start border-gray-300"
           value={application.applicationStatus}
           onChange={(e) =>
             onStatusChange(
@@ -49,10 +50,15 @@ export default function ApplicationCard({
           <>
             <dt className="text-gray-600">Note:</dt>
             <dd>
-              {application.note}
-              <button onClick={() => setEditing(true)}>
-                {application.note ? "Edit Note" : "Add Note"}
-              </button>
+              <div className="flex items-center gap-2">
+                {application.note}
+                <button
+                  className="px-3 py-1 border rounded text-sm hover:bg-gray-100 border-gray-300"
+                  onClick={() => setEditing(true)}
+                >
+                  {application.note ? "Edit Note" : "Add Note"}
+                </button>
+              </div>
             </dd>
           </>
         )}
@@ -65,6 +71,7 @@ export default function ApplicationCard({
                 onChange={(e) => setDraft(e.target.value)}
               />
               <button
+                className="px-3 py-1 border rounded text-sm hover:bg-gray-100 border-gray-300"
                 onClick={() => {
                   onNoteChange(application.applicationId, draft);
                   setEditing(false);
@@ -73,6 +80,7 @@ export default function ApplicationCard({
                 Save Note
               </button>
               <button
+                className="px-3 py-1 border rounded text-sm hover:bg-gray-100 border-gray-300"
                 onClick={() => {
                   setDraft(application.note);
                   setEditing(false);
@@ -83,8 +91,12 @@ export default function ApplicationCard({
             </dd>
           </>
         )}
-        <dt className="text-gray-600">Date Applied:</dt>
-        <dd>{application.dateApplied}</dd>
+        {application.dateApplied && (
+          <>
+            <dt className="text-gray-600">Date Applied:</dt>
+            <dd>{application.dateApplied}</dd>
+          </>
+        )}
       </dl>
     </div>
   );

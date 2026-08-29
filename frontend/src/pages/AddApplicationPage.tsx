@@ -44,60 +44,89 @@ function AddApplicationPage() {
 
   return (
     <>
-      <h2> AddApplication</h2>
-      <br />
-      <label>Business Name: </label>
-      <input
-        value={form.businessName}
-        onChange={(e) => setForm({ ...form, businessName: e.target.value })}
-      />
-      <br />
-      <label>Application URL: </label>
-      <input
-        value={form.url}
-        onChange={(e) => setForm({ ...form, url: e.target.value })}
-      />
-      <br />
-      <label>Application Status: </label>
-      <select
-        value={form.applicationStatus}
-        onChange={(e) =>
-          setForm({
-            ...form,
-            applicationStatus: e.target.value as ApplicationStatus,
-          })
-        }
-      >
-        <option value="Applied">Applied</option>
-        <option value="Rejected">Rejected</option>
-        <option value="InterviewScheduled">Interview Scheduled</option>
-        <option value="RejectedPostInterview">Rejected Post Interview</option>
-        <option value="OfferReceived">Offer Received</option>
-        <option value="OfferRejected">Offer Rejected</option>
-        <option value="OfferAccepted">Offer Accepted</option>
-        <option value="PositionClosed">Position Closed</option>
-      </select>
-      <br />
-      <label>Note: </label>
-      <input
-        value={form.note}
-        onChange={(e) => setForm({ ...form, note: e.target.value })}
-      />
-      <br />
-      <label>Date Applied: </label>
-      <input
-        type="date"
-        value={form.dateApplied}
-        onChange={(e) => setForm({ ...form, dateApplied: e.target.value })}
-      />
-      <br />
-      <br />
-      <button onClick={handleSubmit} disabled={saveMutation.isPending}>
-        Submit
-      </button>
-      {validationError && <p>{validationError}</p>}
-      {saveMutation.error && <p>{saveMutation.error.message}</p>}
-      {success && <p>Application saved</p>}
+      <div className="max-w-md">
+        <h2>AddApplication</h2>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Business Name:{" "}
+          </label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            value={form.businessName}
+            onChange={(e) => setForm({ ...form, businessName: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Application URL:{" "}
+          </label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            value={form.url}
+            onChange={(e) => setForm({ ...form, url: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Application Status:{" "}
+          </label>
+          <select
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            value={form.applicationStatus}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                applicationStatus: e.target.value as ApplicationStatus,
+              })
+            }
+          >
+            <option value="Applied">Applied</option>
+            <option value="Rejected">Rejected</option>
+            <option value="InterviewScheduled">Interview Scheduled</option>
+            <option value="RejectedPostInterview">
+              Rejected Post Interview
+            </option>
+            <option value="OfferReceived">Offer Received</option>
+            <option value="OfferRejected">Offer Rejected</option>
+            <option value="OfferAccepted">Offer Accepted</option>
+            <option value="PositionClosed">Position Closed</option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Note:{" "}
+          </label>
+          <textarea
+            rows={3}
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            value={form.note}
+            onChange={(e) => setForm({ ...form, note: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Date Applied:{" "}
+          </label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            type="date"
+            value={form.dateApplied}
+            onChange={(e) => setForm({ ...form, dateApplied: e.target.value })}
+          />
+        </div>
+        <button
+          onClick={handleSubmit}
+          disabled={saveMutation.isPending}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          Submit
+        </button>
+        {validationError && <p>{validationError}</p>}
+        {saveMutation.error && (
+          <p className="text-red-600 mt-2">{saveMutation.error.message}</p>
+        )}
+        {success && <p className="text-green-600 mt-2">Application saved</p>}
+      </div>
     </>
   );
 }

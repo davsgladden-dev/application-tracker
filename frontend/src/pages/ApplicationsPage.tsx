@@ -1,4 +1,4 @@
-import type { Application, ApplicationStatus } from "../types/application";
+import type { ApplicationStatus } from "../types/application";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import ApplicationCard from "../components/ApplicationCard";
 import { getApplications, updateNote, updateStatus } from "../api/applications";
@@ -13,7 +13,9 @@ function ApplicationsPage() {
     queryKey: ["applications"],
     queryFn: getApplications,
   });
+
   const queryClient = useQueryClient();
+
   const statusMutation = useMutation({
     mutationFn: ({
       applicationId,
@@ -26,6 +28,7 @@ function ApplicationsPage() {
       queryClient.invalidateQueries({ queryKey: ["applications"] });
     },
   });
+
   const noteMutation = useMutation({
     mutationFn: ({
       applicationId,

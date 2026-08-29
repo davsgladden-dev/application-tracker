@@ -23,14 +23,19 @@ function DashboardPage() {
   return (
     <>
       <h2>Dashboard</h2>
-      <br />
-      <p>Application Counts: {data.length}</p>
-      <br />
-      {Object.entries(counts).map(([status, count]) => (
-        <div key={status}>
-          {status}: {count}
-        </div>
-      ))}
+      <div className="grid gird-cols-3 gap-4">
+        <p>Application Counts: {data.length}</p>
+        <br />
+        {Object.entries(counts).map(([status, count]) => (
+          <div
+            className="border border-gray-200 rounded-lg bg-white p-4 shadow-sm"
+            key={status}
+          >
+            <div className="text-sm text-gray-600">{status}</div>
+            <div className="text-2xl font-bold">{count}</div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
