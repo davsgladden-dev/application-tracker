@@ -6,6 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 function AddApplicationPage() {
   const [form, setForm] = useState<NewApplication>({
     businessName: "",
+    jobTitle: "",
     url: "",
     applicationStatus: "Applied",
     note: "",
@@ -28,6 +29,7 @@ function AddApplicationPage() {
       queryClient.invalidateQueries({ queryKey: ["applications"] });
       setForm({
         businessName: "",
+        jobTitle: "",
         url: "",
         applicationStatus: "Applied",
         note: "",
@@ -61,6 +63,16 @@ function AddApplicationPage() {
             className="border border-gray-300 rounded px-3 py-2 w-full"
             value={form.businessName}
             onChange={(e) => setForm({ ...form, businessName: e.target.value })}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Job Title:
+          </label>
+          <input
+            className="border border-gray-300 rounded px-3 py-2 w-full"
+            value={form.jobTitle}
+            onChange={(e) => setForm({ ...form, jobTitle: e.target.value })}
           />
         </div>
         <div className="mb-4">

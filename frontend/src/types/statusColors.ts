@@ -38,4 +38,9 @@ export const statusColors: Record<
     border: "border-gray-500",
     bg: "bg-gray-50",
   },
+  NoLongerAccepting: {
+    text: "text-gray-600",
+    border: "border-gray-500",
+    bg: "bg-gray-50",
+  },
 };

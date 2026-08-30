@@ -6,11 +6,13 @@ export type ApplicationStatus =
   | "OfferReceived"
   | "OfferRejected"
   | "OfferAccepted"
-  | "PositionClosed";
+  | "PositionClosed"
+  | "NoLongerAccepting";
 
 export interface Application {
   applicationId: number;
   businessName: string;
+  jobTitle: string;
   url: string;
   applicationStatus: ApplicationStatus;
   note: string;

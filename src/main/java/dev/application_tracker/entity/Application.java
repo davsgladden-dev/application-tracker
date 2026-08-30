@@ -24,6 +24,9 @@ public class Application {
     @Column(name = "BusinessName")
     private String businessName;
 
+    @Column(name = "JobTitle")
+    private String jobTitle;
+
     @Column(name = "URL")
     private String url;
 

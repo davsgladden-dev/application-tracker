@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class ApplicationDto {
     private int applicationId;
     private String businessName;
+    private String jobTitle;
     private String url;
     private ApplicationStatus applicationStatus;
     private String note;

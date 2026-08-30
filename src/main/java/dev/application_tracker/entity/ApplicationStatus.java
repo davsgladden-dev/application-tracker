@@ -12,7 +12,8 @@ public enum ApplicationStatus {
     OfferReceived("Offer Received"),
     OfferRejected("Offer Rejected"),
     OfferAccepted("Offer Accepted"),
-    PositionClosed("Position Closed");
+    PositionClosed("Position Closed"),
+    NoLongerAccepting("No Longer Accepting");
 
     ApplicationStatus(String displayName) {this.displayName = displayName;}
 

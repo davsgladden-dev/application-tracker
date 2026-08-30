@@ -22,6 +22,7 @@ export default function ApplicationRow({
   return (
     <tr className="border-b border-gray-200 hover:bg-gray-50">
       <td className="px-4 py-3">{application.businessName}</td>
+      <td className="px-4 py-3">{application.jobTitle}</td>
       <td className="px-4 py-3">
         {application.url && (
           <a

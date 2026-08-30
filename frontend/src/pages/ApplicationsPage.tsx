@@ -132,6 +132,12 @@ function ApplicationsPage() {
                 Business Name {sortArrow("businessName")}
               </th>
               <th
+                className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-100 w-1/6"
+                onClick={() => handleSort("jobTitle")}
+              >
+                Job Title {sortArrow("jobTitle")}
+              </th>
+              <th
                 className="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wide cursor-pointer hover:bg-gray-100 w-1/12"
                 onClick={() => handleSort("url")}
               >

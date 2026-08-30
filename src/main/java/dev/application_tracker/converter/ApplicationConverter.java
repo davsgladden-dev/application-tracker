@@ -12,6 +12,7 @@ public class ApplicationConverter {
 
         dto.setApplicationId(entity.getApplicationId());
         dto.setBusinessName(entity.getBusinessName());
+        dto.setJobTitle(entity.getJobTitle());
         dto.setUrl(entity.getUrl());
         dto.setApplicationStatus(entity.getApplicationStatus());
         dto.setNote(entity.getNote());
@@ -24,6 +25,7 @@ public class ApplicationConverter {
         Application entity = new Application();
 
         entity.setBusinessName(dto.getBusinessName());
+        entity.setJobTitle(dto.getJobTitle());
         entity.setUrl(dto.getUrl());
         entity.setApplicationStatus(dto.getApplicationStatus());
         entity.setNote(dto.getNote());
