@@ -29,6 +29,12 @@ Maven is not required — the project includes the Maven wrapper (`mvnw`).
 
 ```
 application-tracker/
+├── frontend/                                React application
+│   └── src/
+│       ├── api/            fetch wrappers for the REST endpoints
+│       ├── components/     reusable components
+│       ├── pages/          one component per route
+│       └── types/          shared TypeScript types
 ├── src/main/java/dev/application_tracker/   Spring Boot application
 │   ├── contoller/
 │   ├── converter/
@@ -37,12 +43,6 @@ application-tracker/
 │   ├── respository/
 │   └── service/
 ├── src/main/resources/application.yml
-├── frontend/                                React application
-│   └── src/
-│       ├── api/            fetch wrappers for the REST endpoints
-│       ├── components/     reusable components
-│       ├── pages/          one component per route
-│       └── types/          shared TypeScript types
 ├── mvnw
 └── pom.xml
 ```
