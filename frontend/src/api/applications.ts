@@ -29,6 +29,17 @@ export async function saveApplication(
   return response.json();
 }
 
+export async function getStatuses(): Promise<Record<string, string>> {
+  const response = await fetch("/tracker/statuses");
+
+  if (!response.ok) {
+    throw new Error(`HTTP error. Status ${response.status}`);
+  }
+  const statuses: Record<string, string> = await response.json();
+
+  return statuses;
+}
+
 export async function updateStatus(
   applicationId: number,
   status: ApplicationStatus,

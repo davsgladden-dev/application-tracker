@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tracker")
@@ -27,8 +31,12 @@ public class Controller {
     public final TrackerService trackerService;
 
     @GetMapping("/statuses")
-    public ApplicationStatus[] getApplicationStatusList() {
-        return ApplicationStatus.values();
+    public Map<String, String> getApplicationStatusList() {
+        return Arrays.stream(ApplicationStatus.values())
+                .collect(Collectors
+                .toMap(ApplicationStatus::name,
+                        ApplicationStatus::getDisplayName,
+                        (existing, replacement) -> existing, LinkedHashMap::new));
     }
 
     @GetMapping("/applications")
@@ -48,7 +56,7 @@ public class Controller {
 
     @PatchMapping("/updateStatus")
     public ResponseEntity<ApplicationDto> updateApplicationStatus(@RequestBody StatusDto statusDto) {
-         return ResponseEntity.ok().body(trackerService.updateApplicationStatus(statusDto));
+        return ResponseEntity.ok().body(trackerService.updateApplicationStatus(statusDto));
     }
 
     @PatchMapping("/updateNote")

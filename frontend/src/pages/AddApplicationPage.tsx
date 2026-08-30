@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { NewApplication, ApplicationStatus } from "../types/application";
-import { saveApplication } from "../api/applications";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { saveApplication, getStatuses } from "../api/applications";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 function AddApplicationPage() {
   const [form, setForm] = useState<NewApplication>({
@@ -16,6 +16,11 @@ function AddApplicationPage() {
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
+
+  const { data: statuses = {} } = useQuery({
+    queryKey: ["statuses"],
+    queryFn: getStatuses,
+  });
 
   const saveMutation = useMutation({
     mutationFn: saveApplication,
@@ -44,11 +49,13 @@ function AddApplicationPage() {
 
   return (
     <>
-      <div className="max-w-md">
-        <h2>AddApplication</h2>
+      <h2 className="mb-6 text-3xl font-semibold text-gray-900 tracking-tight">
+        Add Application
+      </h2>
+      <div className="bg-white rounded-lg shadow p-6 max-w-2xl">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Business Name:{" "}
+            Business Name:
           </label>
           <input
             className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -58,7 +65,7 @@ function AddApplicationPage() {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Application URL:{" "}
+            Application URL:
           </label>
           <input
             className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -68,7 +75,7 @@ function AddApplicationPage() {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Application Status:{" "}
+            Application Status:
           </label>
           <select
             className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -80,21 +87,16 @@ function AddApplicationPage() {
               })
             }
           >
-            <option value="Applied">Applied</option>
-            <option value="Rejected">Rejected</option>
-            <option value="InterviewScheduled">Interview Scheduled</option>
-            <option value="RejectedPostInterview">
-              Rejected Post Interview
-            </option>
-            <option value="OfferReceived">Offer Received</option>
-            <option value="OfferRejected">Offer Rejected</option>
-            <option value="OfferAccepted">Offer Accepted</option>
-            <option value="PositionClosed">Position Closed</option>
+            {Object.entries(statuses).map(([name, displayName]) => (
+              <option key={name} value={name}>
+                {displayName}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Note:{" "}
+            Note:
           </label>
           <textarea
             rows={3}
@@ -105,7 +107,7 @@ function AddApplicationPage() {
         </div>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Date Applied:{" "}
+            Date Applied:
           </label>
           <input
             className="border border-gray-300 rounded px-3 py-2 w-full"
@@ -121,11 +123,17 @@ function AddApplicationPage() {
         >
           Submit
         </button>
-        {validationError && <p>{validationError}</p>}
-        {saveMutation.error && (
-          <p className="text-red-600 mt-2">{saveMutation.error.message}</p>
+        {validationError && (
+          <p className="text-red-600 text-sm mt-2">{validationError}</p>
         )}
-        {success && <p className="text-green-600 mt-2">Application saved</p>}
+        {saveMutation.error && (
+          <p className="text-red-600 text-sm mt-2">
+            {saveMutation.error.message}
+          </p>
+        )}
+        {success && (
+          <p className="text-green-600 text-sm mt-2">Application saved</p>
+        )}
       </div>
     </>
   );

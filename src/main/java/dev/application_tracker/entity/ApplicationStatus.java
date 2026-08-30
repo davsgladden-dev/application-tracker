@@ -1,18 +1,21 @@
 package dev.application_tracker.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum ApplicationStatus {
 
-    Applied(1),
-    Rejected(2),
-    InterviewScheduled(3),
-    RejectedPostInterview(4),
-    OfferReceived(5),
-    OfferRejected(6),
-    OfferAccepted(7),
-    PositionClosed(8);
+    Applied("Applied"),
+    Rejected("Rejected"),
+    InterviewScheduled("Interview Scheduled"),
+    RejectedPostInterview("Rejected Post Interview"),
+    OfferReceived("Offer Received"),
+    OfferRejected("Offer Rejected"),
+    OfferAccepted("Offer Accepted"),
+    PositionClosed("Position Closed");
 
-    ApplicationStatus(int status) {this.status = status;}
+    ApplicationStatus(String displayName) {this.displayName = displayName;}
 
-    private final int status;
+    private final String displayName;
 
 }
