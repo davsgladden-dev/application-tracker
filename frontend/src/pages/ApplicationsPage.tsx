@@ -9,7 +9,6 @@ import {
 } from "../api/applications";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { statusColors } from "../types/statusColors";
 
 function ApplicationsPage() {
   const {

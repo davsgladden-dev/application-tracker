@@ -1,9 +1,8 @@
-package dev.application_tracker.contoller;
+package dev.application_tracker.controller;
 
 import dev.application_tracker.dto.ApplicationDto;
 import dev.application_tracker.dto.NoteDto;
 import dev.application_tracker.dto.StatusDto;
-import dev.application_tracker.entity.Application;
 import dev.application_tracker.entity.ApplicationStatus;
 import dev.application_tracker.service.TrackerService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
