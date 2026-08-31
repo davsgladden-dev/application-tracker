@@ -9,7 +9,7 @@ interface ApplicationRowProps {
   onNoteChange: (applicationId: number, note: string) => void;
 }
 
-export default function ApplicationRow({
+function ApplicationRow({
   application,
   onStatusChange,
   onNoteChange,
@@ -107,3 +107,5 @@ export default function ApplicationRow({
     </tr>
   );
 }
+
+export default ApplicationRow;
